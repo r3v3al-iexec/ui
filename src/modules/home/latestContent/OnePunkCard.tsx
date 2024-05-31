@@ -41,7 +41,7 @@ export function OnePunkCard({
   const highlightedCls = () => {
     console.log(punkId, myPunkId)
 
-    return showPick && (punkId ==  myPunkId) ? "punkHighLight" : "";
+    return showPick && (punkId == myPunkId) ? "punkHighLight" : "";
   }
 
   const selectCard = () => {
@@ -92,10 +92,15 @@ export function OnePunkCard({
             </div>
             <div className="group mt-0.5 inline-block w-full truncate text-grey-500">
               <span className="inline group-hover:hidden">
-                Put the detals here
+                {myPunkId == 'sm1' && (<>Sail the Web3 seas,<br/>reclaim ownership of treasure<br/>using iExec DataProtector</>)}
+                {myPunkId == 'sm2' && (<>You’re treasure is protected<br/>in fiery SGX vaults</>)}
+                {myPunkId == 'md1' && (<>Decrypt her wealth<br/>and reclaim what is<br/>rightfully yours</>)}
+                {myPunkId == 'md2' && (<>NoTAG_MED</>)}
+                {myPunkId == 'lg1' && (<>He can’t monetize<br/>what he doesn’t own, prove<br/>ownership of your digital treasure</>)}
+                {myPunkId == 'lg2' && (<>NoTAG_LG</>)}
               </span>
-              <span className="hidden text-xs group-hover:inline">
-                Put more info here
+              <span className=" text-xs group-hover:inline">
+                &nbsp;
               </span>
             </div>
           </div>
