@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { useCreateMapStore } from '@/stores/create.store.ts';
 import { generateProtectedData } from '@/utils/generateProtectedData';
+import { toast } from '@/components/ui/use-toast.ts';
 
 export function PreviewCreateMap({
 }: {}) {
@@ -19,7 +20,8 @@ export function PreviewCreateMap({
   const loggedUserAddress = useUserStore().address;
   const { punkId, rarity, pricePerGuess, durationInDays, poolPrize } = useCreateMapStore();
 
-  var isLoading = false;
+  const [isLoading, setLoading] = useState(false);
+
   var isError = false;
   var error = "";
 
@@ -28,7 +30,7 @@ export function PreviewCreateMap({
   }
 
   const processIt = () => {
-
+    setLoading(true);
     var mapSize = 0;
     mapSize = punkId == 'sm1' ? 1000 * 1000 : mapSize;
     mapSize = punkId == 'sm2' ? 1000 * 1000 : mapSize;
@@ -40,6 +42,11 @@ export function PreviewCreateMap({
     var rewardRatio = (100.00 - rarity) / 100.00
     var protectedDataList = generateProtectedData(mapSize, rewardRatio, poolPrize);
     console.log("protectedDataList", protectedDataList)
+    
+  /*  toast({
+      variant: 'success',
+      title: 'Monetization set successfully.',
+    }); */
   }
 
   const formatThousands = (num) => {
@@ -56,7 +63,6 @@ export function PreviewCreateMap({
     areaLength = punkId == 'md2' ? 10000 : areaLength;
     areaLength = punkId == 'lg1' ? 100000 : areaLength;
     areaLength = punkId == 'lg2' ? 100000 : areaLength;
-
 
     let cols = areaLength / 100;
     let lines = areaLength / 100;
@@ -88,6 +94,7 @@ export function PreviewCreateMap({
                 showLockIcon={false}
                 className="h-full"
                 showPick={false}
+                isGrid={true}
               />
             </div>
 
@@ -104,7 +111,7 @@ export function PreviewCreateMap({
               {punkId == 'lg2' && (<>100</>)} RLC into the <b>community pool</b>
             </div>
             <div className="mt-[60px]">
-              <Button onClick={processIt}>
+              <Button onClick={processIt} isLoading={isLoading}>
                 Let's go 🚀
               </Button>
             </div>

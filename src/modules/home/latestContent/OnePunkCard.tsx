@@ -14,6 +14,15 @@ import pkMedium1 from '@/assets/punks/punk-medium-1.png';
 import pkMedium2 from '@/assets/punks/punk-medium-2.png';
 import pkLarge1 from '@/assets/punks/punk-large-1.png';
 import pkLarge2 from '@/assets/punks/punk-large-2.png';
+
+import pkSmall1Grid from '@/assets/punks/punk-small-1-grid.png';
+import pkSmall2Grid from '@/assets/punks/punk-small-2-grid.png';
+import pkMedium1Grid from '@/assets/punks/punk-medium-1-grid.png';
+//import pkMedium2Grid from '@/assets/punks/punk-medium-2-grid.png';
+import pkLarge1Grid from '@/assets/punks/punk-large-1-grid.png';
+//import pkLarge2Grid from '@/assets/punks/punk-large-2-grid.png';
+
+
 import { useCreateMapStore } from '@/stores/create.store';
 
 export function OnePunkCard({
@@ -22,14 +31,16 @@ export function OnePunkCard({
   className,
   showLockIcon = true,
   onSelected,
-  showPick = true
+  showPick = true,
+  isGrid = false,
 }: {
   myPunkId?: string;
   linkToDetails?: string;
   className?: string;
   showLockIcon?: boolean;
-  onSelected: Function
-  showPick?: boolean
+  onSelected: Function;
+  showPick?: boolean;
+  isGrid?: boolean;
 }) {
   const cardVisualBg = getCardVisualNumber({
     address: "foo",
@@ -64,12 +75,19 @@ export function OnePunkCard({
             'flex h-full w-full items-center justify-center bg-cover bg-bottom'
           )}
         >
-          {myPunkId == 'sm1' && (<img src={pkSmall1} className='punkCardImg' />)}
-          {myPunkId == 'sm2' && (<img src={pkSmall2} className='punkCardImg' />)}
-          {myPunkId == 'md1' && (<img src={pkMedium1} className='punkCardImg' />)}
-          {myPunkId == 'md2' && (<img src={pkMedium2} className='punkCardImg' />)}
-          {myPunkId == 'lg1' && (<img src={pkLarge1} className='punkCardImg' />)}
-          {myPunkId == 'lg2' && (<img src={pkLarge2} className='punkCardImg' />)}
+          {myPunkId == 'sm1' && !isGrid && (<img src={pkSmall1} className='punkCardImg' />)}
+          {myPunkId == 'sm2' && !isGrid && (<img src={pkSmall2} className='punkCardImg' />)}
+          {myPunkId == 'md1' && !isGrid && (<img src={pkMedium1} className='punkCardImg' />)}
+          {myPunkId == 'md2' && !isGrid && (<img src={pkMedium2} className='punkCardImg' />)}
+          {myPunkId == 'lg1' && !isGrid && (<img src={pkLarge1} className='punkCardImg' />)}
+          {myPunkId == 'lg2' && !isGrid && (<img src={pkLarge2} className='punkCardImg' />)}
+
+          {myPunkId == 'sm1' && isGrid && (<img src={pkSmall1Grid} className='punkCardImg' />)}
+          {myPunkId == 'sm2' && isGrid && (<img src={pkSmall2Grid} className='punkCardImg' />)}
+          {myPunkId == 'md1' && isGrid && (<img src={pkMedium1Grid} className='punkCardImg' />)}
+
+          {myPunkId == 'lg1' && isGrid && (<img src={pkLarge1Grid} className='punkCardImg' />)}
+
 
           {showLockIcon && (
             <Lock
@@ -108,9 +126,8 @@ export function OnePunkCard({
           <div className="-mt-0.5 pl-6 text-base font-bold text-primary">
             <div className="right-text">
               <div>
-                {punkId == 'sm1' && (<>Easy</>)}
-                {myPunkId == 'sm2' && (<>Easy</>)}
                 {myPunkId == 'sm1' && (<>Easy</>)}
+                {myPunkId == 'sm2' && (<>Easy</>)}
                 {myPunkId == 'md1' && (<>Medium</>)}
                 {myPunkId == 'md2' && (<>Medium</>)}
                 {myPunkId == 'lg1' && (<>Hard</>)}
