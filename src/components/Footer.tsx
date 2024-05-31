@@ -1,5 +1,5 @@
 import { SocialMediaLinks } from './SocialMediaLinks.tsx';
-import Logo2 from '../assets/logo2.webp';
+import Logo2 from '../assets/logo2.png';
 
 export function Footer() {
   return (
