@@ -193,7 +193,7 @@
 
 
 .punkCardImg{
-  width: 400px;
+  width: 280px;
   height: auto; /* Maintain aspect ratio */
 }
 
@@ -219,4 +219,20 @@
 
 .punkHighLight {
   border: 5px dashed #fcd15a !important;
+}
+
+.bgPunkSm1{
+  background-color: #9ee0ff !important;
+}
+
+.bgPunkSm2{
+  background-color: #00d79d !important;
+}
+
+.bgPunkMd1{
+  background-color: #5846b1 !important;
+}
+
+.bgPunkLg1{
+  background-color: #ffc400 !important;
 }

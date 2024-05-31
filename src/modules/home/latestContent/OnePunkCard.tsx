@@ -55,6 +55,16 @@ export function OnePunkCard({
     return showPick && (punkId == myPunkId) ? "punkHighLight" : "";
   }
 
+
+  const bgCls = () => {
+
+    if (myPunkId == 'sm1') return 'bgPunkSm1' ;  
+    if (myPunkId == 'sm2') return 'bgPunkSm2' ;  
+    if (myPunkId == 'md1') return 'bgPunkMd1' ;  
+    if (myPunkId == 'lg1') return 'bgPunkLg1' ;  
+
+  }
+
   const selectCard = () => {
     console.log(punkId)
     setPunkId(myPunkId || '')
@@ -71,7 +81,7 @@ export function OnePunkCard({
       >
         <div
           className={clsx(
-            styles[cardVisualBg],
+            bgCls(),
             'flex h-full w-full items-center justify-center bg-cover bg-bottom'
           )}
         >

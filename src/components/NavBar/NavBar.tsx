@@ -58,14 +58,13 @@ export function NavBar({ className }: { className?: string }) {
       {isConnected ? (
         <div className="mb-16 hidden flex-1 flex-col justify-center gap-y-4 pl-4 group-has-[:checked]:flex md:mb-0 md:flex md:translate-y-0 md:flex-row md:items-center md:justify-end lg:ml-4">
           <div className="flex flex-col gap-y-4 md:mx-2 md:flex-row md:items-start md:gap-x-2 md:text-base lg:ml-6 lg:mr-8 lg:gap-x-5 xl:mr-20 xl:gap-x-16">
-            <Link to={'/explore'} className="p-1 hover:drop-shadow-link-hover reveal-text-nav">
+            <Link  className="p-1 hover:drop-shadow-link-hover reveal-text-nav">
               Leaderboard
             </Link>
             <Link
-              to={'/my-content'}
               className="p-1 hover:drop-shadow-link-hover"
             >
-              Manage
+              My Games
             </Link>
           </div>
 
