@@ -49,11 +49,7 @@ export function NavBar({ className }: { className?: string }) {
           </Link>
 
           <div className="ml-3 reveal-text">    
-          <Button>
-          <ArrowUpRight size="20" className="-mr-1 ml-1.5" />
-            Explore
-            
-          </Button>
+
           </div>
         </div>
         
@@ -64,15 +60,6 @@ export function NavBar({ className }: { className?: string }) {
           <div className="flex flex-col gap-y-4 md:mx-2 md:flex-row md:items-start md:gap-x-2 md:text-base lg:ml-6 lg:mr-8 lg:gap-x-5 xl:mr-20 xl:gap-x-16">
             <Link to={'/explore'} className="p-1 hover:drop-shadow-link-hover reveal-text-nav">
               Leaderboard
-            </Link>
-            <Link to={'/rent'} className="p-1 hover:drop-shadow-link-hover reveal-text-nav">
-              Rent
-            </Link>
-            <Link
-              to={'/subscribe'}
-              className="p-1 hover:drop-shadow-link-hover reveal-text-nav"
-            >
-              Subscribe
             </Link>
             <Link
               to={'/my-content'}
@@ -93,17 +80,7 @@ export function NavBar({ className }: { className?: string }) {
             </button>
           </div>
           <div className="mx-4 hidden h-[36px] w-px bg-grey-700 md:block"></div>
-          <Label
-            htmlFor="dev-mode"
-            className="flex items-center space-x-2 py-2 md:py-1"
-          >
-            <Switch
-              id="dev-mode"
-              checked={isDevMode}
-              onCheckedChange={setDevMode}
-            />
-            <span className="whitespace-nowrap">Dev Mode</span>
-          </Label>
+        
         </div>
       ) : (
         <div className="items-center">
