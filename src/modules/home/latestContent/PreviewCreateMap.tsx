@@ -1,4 +1,4 @@
-import type { ProtectedDataInCollection } from '@iexec/dataprotector';
+import type { AddToCollectionParams, ProtectedDataInCollection, ProtectedDataWithSecretProps, SuccessWithTransactionHash } from '@iexec/dataprotector';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { Alert } from '@/components/Alert.tsx';
@@ -13,6 +13,10 @@ import { Button } from '@/components/ui/button.tsx';
 import { useCreateMapStore } from '@/stores/create.store.ts';
 import { generateProtectedData } from '@/utils/generateProtectedData';
 import { toast } from '@/components/ui/use-toast.ts';
+import { useSignMessage } from 'wagmi'
+import { generateSignatureChallenge, getIExec, createWallet, getCollectionTokenId } from '@/utils/iexec/walletProvider.ts'
+import WalletType from '@/utils/iexec/walletType.ts';
+
 
 export function PreviewCreateMap({
 }: {}) {
@@ -21,6 +25,9 @@ export function PreviewCreateMap({
   const { punkId, rarity, pricePerGuess, durationInDays, poolPrize } = useCreateMapStore();
 
   const [isLoading, setLoading] = useState(false);
+  const [processedCount, setProcessedCount] = useState(0);
+
+  const { signMessage, signMessageAsync } = useSignMessage()
 
   var isError = false;
   var error = "";
@@ -29,7 +36,7 @@ export function PreviewCreateMap({
     console.log(foo)
   }
 
-  const processIt = () => {
+  const processIt = async () => {
     setLoading(true);
     var mapSize = 0;
     mapSize = punkId == 'sm1' ? 1000 * 1000 : mapSize;
@@ -41,12 +48,45 @@ export function PreviewCreateMap({
 
     var rewardRatio = (100.00 - rarity) / 100.00
     var protectedDataList = generateProtectedData(mapSize, rewardRatio, poolPrize);
-    console.log("protectedDataList", protectedDataList)
-    
-  /*  toast({
+    // console.log("protectedDataList", protectedDataList)
+
+    let messageToSign = generateSignatureChallenge((loggedUserAddress || '').toString());
+
+    var signResult = await signMessageAsync({ message: messageToSign })
+
+    console.log("signResult", signResult);
+    let activeProfile = {
+      ownedBy: { address: loggedUserAddress || '' }
+    }
+    var wallet = await createWallet(WalletType.CONTENT_PUBLISHER, activeProfile, signResult);
+    console.log("wallet.address", wallet.address);
+
+    let dataProtectorSdk = getIExec(
+      WalletType.CONTENT_PUBLISHER,
+      activeProfile,
+      signResult
+    )
+
+    for (var l = 0; l < protectedDataList.items.length; l++) {
+
+      let protectDataParam = {
+        data:
+        {
+          data: JSON.stringify( protectedDataList.items[l] ) ,
+          [`r3veal-${protectedDataList.mapId}`]: 'void'
+        },
+        name: `r3veal-${protectedDataList.mapId}-${l}`
+      }
+
+      const res: ProtectedDataWithSecretProps | undefined = await dataProtectorSdk?.core.protectData(protectDataParam)
+      setProcessedCount(l)
+    }
+
+
+    toast({
       variant: 'success',
-      title: 'Monetization set successfully.',
-    }); */
+      title: 'All protected data have been created',
+    });
   }
 
   const formatThousands = (num) => {
@@ -112,7 +152,8 @@ export function PreviewCreateMap({
             </div>
             <div className="mt-[60px]">
               <Button onClick={processIt} isLoading={isLoading}>
-                Let's go 🚀
+                {!isLoading && (<>Let's go 🚀</>)}
+                {isLoading && (<>{processedCount}/{getPlayerCount()} 🚀</>)}
               </Button>
             </div>
           </div>

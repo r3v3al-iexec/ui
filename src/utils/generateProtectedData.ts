@@ -1,4 +1,4 @@
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 const MAX_PROTECTEDAREA_LENGTH = 100;
 
@@ -21,7 +21,7 @@ export const generateProtectedData = (mapSize, rewardRatio, totalRewardAmount) =
     let cols = areaLength / 100;
     let lines = areaLength / 100;
     let boxesCount = cols * lines
-    console.log("cols", cols, "lines", lines, "boxesCount", boxesCount)
+
 
     var result = [];
     var remainingRewardAmount = totalRewardAmount;
@@ -48,20 +48,19 @@ export const generateProtectedData = (mapSize, rewardRatio, totalRewardAmount) =
             maxItemReward = rewardValue > maxItemReward ? rewardValue : maxItemReward;
         }
     }
-    console.log("totalRewardAmount", totalRewardAmount, "Nb rewards", rewardCount, "maxRewardValue", maxRewardValue, "maxItemReward", maxItemReward, "remainingRewardAmount", remainingRewardAmount)
+    //console.log("totalRewardAmount", totalRewardAmount, "Nb rewards", rewardCount, "maxRewardValue", maxRewardValue, "maxItemReward", maxItemReward, "remainingRewardAmount", remainingRewardAmount)
 
     if (remainingRewardAmount) {
         var index = result.findIndex((i) => {
             return i.reward == maxItemReward
         })
-        console.log("index", index)
+        // console.log("index", index)
         result[index].boosted = true;
         result[index].reward += remainingRewardAmount;
     }
 
-    console.log(cols, lines)
 
-    var protectedDataList = [] ;
+    var protectedDataList = [];
     for (var l = 0; l < lines; l++) {
         for (var c = 0; c < cols; c++) {
             var minX = c * 100;
@@ -73,21 +72,21 @@ export const generateProtectedData = (mapSize, rewardRatio, totalRewardAmount) =
                 return item.x >= minX && item.x < maxX && item.y >= minY && item.y < maxY
             })
 
-            if (foundItems.length >0) {
-                var boxReward = 0; 
-                foundItems.forEach((k)=>{
-                    boxReward+= k.reward ; 
+            if (foundItems.length > 0) {
+                var boxReward = 0;
+                foundItems.forEach((k) => {
+                    boxReward += k.reward;
                 })
 
-                console.log("minX", minX, "minY", minY, "maxX", maxX, "maxY", maxY, "foundItems", foundItems, "boxReward", boxReward)
+                //console.log("minX", minX, "minY", minY, "maxX", maxX, "maxY", maxY, "foundItems", foundItems, "boxReward", boxReward)
                 let protectedData = {
-                    "mapId":mapId,
-                    "minX": minX, 
+                    "mapId": mapId,
+                    "minX": minX,
                     "minY": minY,
-                    "maxX": maxX, 
+                    "maxX": maxX,
                     "maxY": maxY,
                     "rewardCount": foundItems.length,
-                    "rewardAmount": boxReward, 
+                    "rewardAmount": boxReward,
                     "rewards": foundItems
                 }
                 protectedDataList.push(protectedData)
@@ -95,10 +94,12 @@ export const generateProtectedData = (mapSize, rewardRatio, totalRewardAmount) =
         }
     }
 
-    console.log(JSON.stringify(protectedDataList, null, 1) )
+    // console.log(JSON.stringify(protectedDataList, null, 1) )
 
     //var iexec = getIExec()
-   // console.log("iexec", iexec)
-    return protectedDataList
-
+    // console.log("iexec", iexec)
+    return  {
+        "mapId": mapId, 
+        "items":protectedDataList
+    }
 }

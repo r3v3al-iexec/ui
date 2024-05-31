@@ -1,0 +1,35 @@
+ let messageToSign = generateSignatureChallenge((loggedUserAddress || '').toString());
+  var signResult = signMessage({ message: messageToSign })
+  /*
+  {
+    onSuccess: async (signature) => {
+      try {
+        let iexec = getIExec(
+          WalletType.CONTENT_CONSUMER,
+          activeProfile,
+          signature
+        )
+
+        let getGrantedAccessParam: GetGrantedAccessParams = {
+          protectedData: protectedDataAddress,
+          authorizedApp: CONSUME_CONTENT_DAPP
+        }
+
+        let rentParams: RentProtectedDataParams = {
+          protectedDataAddress: protectedDataAddress || ''
+        }
+
+        let rentResult: SuccessWithTransactionHash | undefined =
+          await iexec?.sharing.rentProtectedData(rentParams)
+
+        let consumeParams: ConsumeProtectedDataParams = {
+          protectedDataAddress: protectedDataAddress || '',
+          onStatusUpdate: onConsumeStatusUpdate
+        }
+
+        let consumeResponse: ConsumeProtectedDataResponse | undefined =
+          await iexec?.sharing.consumeProtectedData(consumeParams)
+
+        throw video
+      } catch (e) { }
+    } */

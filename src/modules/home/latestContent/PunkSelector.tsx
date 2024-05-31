@@ -28,7 +28,7 @@ export function PunkSelector({
 
   const onPunSelected = (aPunkId) => {
     setPunkId(aPunkId);
-    console.log(punkId)
+    //console.log(punkId)
   }
 
   return (

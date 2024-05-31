@@ -50,7 +50,7 @@ export function OnePunkCard({
   const { punkId, setPunkId } = useCreateMapStore();
 
   const highlightedCls = () => {
-    console.log(punkId, myPunkId)
+    //console.log(punkId, myPunkId)
 
     return showPick && (punkId == myPunkId) ? "punkHighLight" : "";
   }
@@ -66,7 +66,7 @@ export function OnePunkCard({
   }
 
   const selectCard = () => {
-    console.log(punkId)
+    //console.log(punkId)
     setPunkId(myPunkId || '')
   }
 

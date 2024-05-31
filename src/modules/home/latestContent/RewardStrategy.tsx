@@ -27,7 +27,7 @@ export function RewardStrategy({
 
   const onPunSelected = (aPunkId) => {
     setPunkId(aPunkId);
-    console.log(selectedPunkId)
+    //console.log(selectedPunkId)
   }
 
   return (
