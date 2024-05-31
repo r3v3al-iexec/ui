@@ -8,7 +8,7 @@ export function Footer() {
         <div className="rounded-[23px] bg-background">
           <div className="mx-auto grid w-[84%] max-w-6xl grid-cols-2 gap-8 gap-x-5 py-16 md:flex md:items-center">
             <div className="-order-1 text-xs xl:flex-1">
-              © 2024 iExec. All rights reserved.
+              © 2024 r3veal &trade;. All rights reserved.
             </div>
             <img src={Logo2} className='logo2'/>
             <div className="-order-1 text-right text-xs md:order-none xl:flex-1">

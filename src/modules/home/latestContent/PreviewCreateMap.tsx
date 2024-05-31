@@ -27,6 +27,20 @@ export function PreviewCreateMap({
     console.log(foo)
   }
 
+  const processIt = () => {
+
+    var mapSize = 0;
+    mapSize = punkId == 'sm1' ? 1000 * 1000 : mapSize;
+    mapSize = punkId == 'sm2' ? 1000 * 1000 : mapSize;
+    mapSize = punkId == 'md1' ? 10000 * 10000 : mapSize;
+    mapSize = punkId == 'md2' ? 10000 * 10000 : mapSize;
+    mapSize = punkId == 'lg1' ? 100000 * 100000 : mapSize;
+    mapSize = punkId == 'lg2' ? 100000 * 100000 : mapSize;
+
+    var rewardRatio = (100.00 - rarity) / 100.00
+    var protectedDataList = generateProtectedData(mapSize, rewardRatio, poolPrize);
+    console.log("protectedDataList", protectedDataList)
+  }
 
   const formatThousands = (num) => {
     const formatter = new Intl.NumberFormat('en-US');
@@ -41,6 +55,8 @@ export function PreviewCreateMap({
     areaLength = punkId == 'md1' ? 10000 : areaLength;
     areaLength = punkId == 'md2' ? 10000 : areaLength;
     areaLength = punkId == 'lg1' ? 100000 : areaLength;
+    areaLength = punkId == 'lg2' ? 100000 : areaLength;
+
 
     let cols = areaLength / 100;
     let lines = areaLength / 100;
@@ -88,7 +104,7 @@ export function PreviewCreateMap({
               {punkId == 'lg2' && (<>100</>)} RLC into the <b>community pool</b>
             </div>
             <div className="mt-[60px]">
-              <Button>
+              <Button onClick={processIt}>
                 Let's go 🚀
               </Button>
             </div>
