@@ -144,9 +144,9 @@
 .punk-floating {
   position: absolute;
   top: 100px; /* Adjust vertical position as needed */
-  left: 80%; /* Center horizontally */
+  left: 85%; /* Center horizontally */
   transform: translateX(-50%);
-  width: 450px;
+  width: 410px;
   height: auto; /* Maintain aspect ratio */
 }
 
